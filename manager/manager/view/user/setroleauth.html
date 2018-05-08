@@ -1,0 +1,25 @@
+<div class="">
+    <div class="layui-row  layui-col-space10" style="margin:0 10px;">
+        <div class="layui-col-xs12">
+            <form class="layui-form layui-form-pane" action="">
+                {volist name="list" id="v"}
+                <div class="layui-form-item" id="{$v['id']}" pid="{$v['pid']}" style="width:100%;margin-left:{$v['deepth']*50}px" pane>
+                    <label class="layui-form-label">{$v['name']}</label>
+                    <div class="layui-input-block">
+                        <input type="checkbox" name="form[{$v['id']}]" {if condition="key_exists($v['id'],$authednodes)" }checked{/if} value="{$v['id']}" title="查看">
+                        {volist name="v['actions']" id="c"}
+                        <input type="checkbox" name="form[{$c['id']}]" {if condition="key_exists($c['id'],$authednodes)" }checked{/if} value="{$c['id']}" title="{$c['name']}">
+                        {/volist}
+                    </div>
+                </div>
+                {/volist}
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="form">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

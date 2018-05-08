@@ -1,0 +1,39 @@
+<div class="mainfrm">
+    <div class="layui-row  layui-col-space10" style="margin:0 10px;">
+        <div class="layui-col-xs12">
+            <form class="layui-form layui-form-pane" lay-filter="form" action="">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">网站名称</label>
+                    <div class="layui-input-inline" style="width:400px;">
+                        <input type="text" name="网站名称" value="{$system['网站名称']}" autocomplete="off" placeholder="不能为空" lay-verify="required" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">联系方式</label>
+                    <div class="layui-input-inline" style="width:300px;">
+                        <input type="text" name="联系方式" value="{$system['联系方式']}" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">QQ</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="QQ" value="{$system['QQ']}" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">软件版本</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="软件版本" value="{$system['软件版本']}" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="form">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

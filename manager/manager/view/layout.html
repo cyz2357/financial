@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>后台管理</title>
+    <link rel="stylesheet" href="__ROOT__/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href=" __ROOT__/css/layui.css">
+    <link rel="stylesheet" href=" __ROOT__/admin.css">
+    <script src="__ROOT__/layui.js"></script>
+</head>
+<body>
+<header class="header">
+    <div class="logo">后台管理</div>
+    <ul class="nav">
+        <li style="margin-right:20px;"><a>欢迎您，{$loginuser['uname']}</a></li>
+        <li><a href="{:url('user/index')}">个人中心</a></li>
+        <li><a id="clearcache">清除缓存</a></li>
+        <li><a id="loginout">退出登录</a></li>
+    </ul>
+</header>
+<div class="sidebar">
+    <div class="nav">
+        {volist name="treenodes" id="v"}
+        {if condition="( isset($v['children'])) "}
+        <h2><span></span><i class="layui-icon">&{$v['icon']}</i>{$v['name']}</h2>
+        <ul class="nav-item">
+            {volist name="v['children']" id="c"}
+            <li><i class="layui-icon">&{$c['icon']}</i><a href="{:url($c['url'])}">{$c['name']}</a></li>
+            {/volist}
+        </ul>
+        {/if}
+        {/volist}
+    </div>
+</div>
+<div class="layui-body">
+    {__CONTENT__}
+</div>
+<div class="layui-footer">
+    <!-- 底部固定区域 -->
+    © layui.com - 底部固定区域
+</div>
+<script>
+    layui.use(['form', 'layedit', 'jquery'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,$ = layui.jquery
+        ;
+
+        $(".sidebar .nav h2 span").click(function(){
+            $(this).parent().toggleClass("shrink");
+            $(this).parent().next("ul").toggleClass("shrink");
+        });
+
+        $('#clearcache').click(function(){
+            $.post("{:url('index/clearcache')}",function(data){
+                layer.msg('清除成功');
+            })
+        });
+
+        $("#loginout").click(function(){
+            $.post("{:url('publics/loginout')}",function(res){
+                layer.msg('退出登录',function(){
+                    location.href = res.url;
+                })
+            })
+        });
+
+        //监听提交
+        form.on('submit(form)', function(data){
+            var url=document.URL;
+            $.post(url,data.field,function(res){
+                layer.msg(res.msg);
+                if(res.url&&res.url!=''){
+                    setTimeout(function(){
+                        location.href=res.url;
+                    },2000);
+                }
+                if(res.url==''){
+                    setTimeout(function(){
+                        location.reload();
+                    },1000);
+                }
+            });
+            return false;
+        });
+
+
+    });
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,59 @@
+<div class="">
+    <div class="layui-row  layui-col-space10" style="margin:0 10px;">
+        {include file="block/pagebtns" /}
+        <div class="layui-col-xs12">
+            <table id="list"  lay-filter="list"></table>
+        </div>
+    </div>
+</div>
+{include file="block/pageactions" /}
+
+<script>
+    layui.use(['laypage', 'layer','table','jquery'], function() {
+        var laypage = layui.laypage
+            , layer = layui.layer
+            , table = layui.table
+            ,$=layui.jquery
+            ;
+
+        table.render({
+            elem: '#list'
+            , id: 'url'
+            , data: {$list}
+            , height: 'full'
+            , cols: [[
+                {field: 'id', title: 'ID', align: 'center', width: 80}
+                , {field: 'name', title: '名称', align: 'left', width: 160}
+                , {field: 'remark', title: '摘要', align: 'left', width: 300}
+                , {field: 'actions', title: '操作', toolbar: '#tool', align: 'left', width: 360}
+            ]]
+            , skin: 'row' //表格风格
+            , even: true
+        });
+
+        table.on('tool(list)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值
+            var tr = obj.tr; //获得当前行 tr 的DOM对象
+
+            if(layEvent === 'deleterole'){ //删除
+                layer.confirm('真的删除行么', function(index){
+                    $.post("{:url('user/deleterole')}?id="+data.id,function(res){
+                        if(res.code == true){
+                            obj.del();
+                        }
+                        layer.msg(res.msg);
+                    })
+                });
+            }
+            else if(layEvent === 'editrole'){ //编辑
+                location.href = "{:url('user/editrole')}?id="+data.id;
+            }
+            else if(layEvent === 'setroleauth'){
+                location.href = "{:url('user/setroleauth')}?id="+data.id;
+            }
+        });
+
+    });
+
+</script>

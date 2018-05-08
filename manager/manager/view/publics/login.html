@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{__NOLAYOUT__}
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>后台管理</title>
+    <link rel="stylesheet" href=" __ROOT__/css/layui.css">
+    <script src="__ROOT__/layui.js"></script>
+    <script src="__ROOT__/md5.js"></script>
+</head>
+<body>
+<div class="wrap" style="position:absolute;width:100%;height:100%;">
+    <div class="mainfrm" style="position:relative;margin:0 auto;top:50%;margin-top:-180px;border:10px solid #efefef;width:360px;height:200px;padding:30px 0 0 20px;">
+        <div class="layui-row  layui-col-space10" style="margin:0 10px;">
+            <div class="layui-col-xs12" style="width:320px;">
+                <form class="layui-form layui-form-pane" lay-filter="form" action="">
+                    {:token('__token__', 'sha1')}
+                    <div class="layui-form-item" style="text-align: center">
+                        <label class="layui-form-label">用户名</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="uname" value="" autocomplete="off" placeholder="不能为空" lay-verify="required" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="text-align: center">
+                        <label class="layui-form-label">登录密码</label>
+                        <div class="layui-input-inline">
+                            <input type="password" name="upass" value="" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="text-align: center;margin-top:30px;">
+                        <button class="layui-btn" lay-submit lay-filter="form" style="width:140px;">登录</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    layui.use(['form', 'layedit', 'jquery'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,$ = layui.jquery
+            ;
+
+        //监听提交
+        form.on('submit(form)', function(data){
+            var url=document.URL;
+            var upass = data.field['upass'];
+
+            if(upass.length==0)
+            {
+                layer.msg('密码不能为空');
+                return false;
+            }
+            data.field['upass'] = hex_md5(upass);
+            $.post(url,data.field,function(res){
+                layer.msg(res.msg);
+                if(res.url&&res.url!=''){
+                    setTimeout(function(){
+                        location.href=res.url;
+                    },2000);
+                }
+                if(res.url==''){
+                    console.log('aaa');
+                    setTimeout(function(){
+                        location.reload();
+                    },1000);
+                }
+            });
+            return false;
+        });
+
+
+    });
+</script>
+
+</body>
+</html>
+

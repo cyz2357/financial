@@ -1,0 +1,77 @@
+<div class="">
+    <div class="layui-row  layui-col-space10" style="margin:0 10px;">
+        {include file="block/pagebtns" /}
+        <div class="layui-col-xs12">
+            <table id="list"  lay-filter="list"></table>
+            <div id="page"></div>
+        </div>
+    </div>
+</div>
+{include file="block/pageactions" /}
+<script type="text/html" id="status">
+    {{#  if(d.status == 0){ }}
+    正常
+    {{#  } else if(d.status == 1){ }}
+    禁止
+    {{#  } else { }}
+    删除
+    {{#  } }}
+</script>
+
+<script>
+    layui.use(['laypage', 'layer','table'], function(){
+        var laypage = layui.laypage
+            ,layer = layui.layer
+            ,table = layui.table
+            ;
+
+        table.render({
+            elem: '#list'
+            ,id:'url'
+            ,data: {$list}
+            ,height: 'full'
+            ,cols: [[
+                {field: 'id', title: 'ID', align:'center',width: 80}
+                ,{field: 'uname', title: '用户名',align:'left', width: 160}
+                ,{field: 'nick', title: '昵称',align:'left', width: 160}
+                ,{field: 'status', title: '状态',align:'left', width: 80, templet: '#status'}
+                ,{field: 'last_login_ip', title: '最后IP',align:'left', width: 150}
+                ,{field: 'last_login_time', title: '最后登录时间',align:'left', width: 180, templet: '#isadmin'}
+                ,{field:'actions',title: '操作',toolbar: '#tool',align:'left',width:360}
+            ]]
+            ,skin: 'row' //表格风格
+            ,even: true
+        });
+
+        table.on('tool(list)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值
+            var tr = obj.tr; //获得当前行 tr 的DOM对象
+
+            if(layEvent === 'edituser'){ //编辑
+                location.href = "{:url('user/edituser')}?id="+data.id;
+            }else if(layEvent === 'setadminauth'){
+                location.href = "{:url('user/setadminauth')}?id="+data.id;
+            }
+            else if(layEvent === 'setuserrole')
+            {
+                location.href = "{:url('user/setuserrole')}?id="+data.id;
+            }
+        });
+
+        laypage.render({
+            elem: 'page'
+            ,count: {$total}
+            ,curr:{$curr}
+            ,limit: {$pagesize}
+            ,limits: [20, 40, 60]
+            ,layout: ['count', 'prev', 'page', 'next', 'limit', 'skip']
+            ,jump: function(obj,first){
+                if(!first){
+                    location.href ="{:url('user/admins')}"+"?page="+obj.curr+'&pagesize='+obj.limit;
+                }
+            }
+        });
+
+    });
+</script>

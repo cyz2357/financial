@@ -1,0 +1,5 @@
+<script type="text/html" id="tool">
+    {volist name="btnandactions['actions']" id="v"}
+    <a class="layui-btn layui-btn-small {$v['extra']} {$v['url']|basename}" lay-event="{$v['url']|basename}">{$v['name']}</a>
+    {/volist}
+</script>

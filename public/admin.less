@@ -1,0 +1,120 @@
+body{
+  padding-top:60px;
+  padding-bottom:50px;
+}
+.header {
+  position: absolute;
+  top:0;
+  width:100%;
+  height: 60px;
+  background:#009688;
+  .logo {
+    float: left;
+    font-size: 20px;
+    line-height: 60px;
+    margin-left:20px;
+    color:#fff;
+    cursor:pointer;
+  }
+  .nav {
+    float: right;
+    margin-right: 20px;
+    margin-top:20px;
+    li {
+      float:left;
+      list-style:none;
+      font-size: 15px;
+      margin-left:15px;
+      a {
+        color: #fff;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.sidebar{
+  width:200px;
+  position:absolute;
+
+  .layui-icon {
+    position: relative;
+    right: 8px;
+    top: 1px;
+    font-size: 20px;
+    color: #009688;
+  }
+
+  .nav{
+    border-right:1px solid #d2d2d2;
+    h2{
+      font-size:18px;
+      line-height:40px;
+      height:40px;
+      background:#e2e2e2;
+      border-bottom:1px solid #d2d2d2;
+      padding-left:20px;
+      cursor:pointer;
+      span{
+        width:0;
+        height:0;
+        border-right:10px solid transparent;
+        border-left:10px solid transparent;
+        border-top:10px solid #009688;
+        border-bottom:0;
+        float:right;
+        margin-right:8px;
+        margin-top:15px;
+      }
+    }
+    h2.shrink{
+      span{
+        border-bottom:10px solid #009688;
+        border-top:0;
+        margin-top:13px;
+      }
+    }
+    ul.nav-item{
+      display: block;
+      li{
+        font-size:14px;
+        line-height:35px;
+        height:35px;
+        padding-left:35px;
+        border-bottom:1px solid #cdcdcd;
+
+        i{
+          font-size:16px;
+          color:#000;
+        }
+        a {
+          color: #333;
+        }
+      }
+    }
+    ul.shrink{
+      display: none;
+    }
+  }
+}
+
+.layui-body{
+  top:70px;
+  left:210px;
+  bottom:60px;
+}
+
+.mainfrm{
+  border:1px solid #efefef;
+  margin:10px 15px 10px 5px;
+}
+.layui-footer{
+  position:absolute;
+  height:50px;
+  line-height:50px;
+  bottom:0;
+  width:100%;
+  text-align:center;
+  border-top:1px solid #cfcfcf;
+  background:#efefef;
+}
