@@ -26,6 +26,7 @@ class Login extends Controller{
 
             if($bool==true){
                 getAlert('登录成功','/manager/index/index');
+                session('account',$user['account']);
             }else{
                 getAlert('登录失败','/manager/login/login');
             }
@@ -36,6 +37,11 @@ class Login extends Controller{
 
         }
         public function LogOut(){
-
+        $_SESSION=array();
+        if(isset($_COOKIE[session_name()])){
+            setcookie(session_name(),''.time()-1,'/');
+        }
+        session_destroy();
+        $this->redirect("/manager/login/login");
         }
 }
