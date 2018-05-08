@@ -1,0 +1,110 @@
+
+@font-face {font-family: "qsfont";
+  src: url('//at.alicdn.com/t/font_m6fm8xj1l6561or.eot?t=1478224507669'); /* IE9*/
+  src: url('//at.alicdn.com/t/font_m6fm8xj1l6561or.eot?t=1478224507669#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('//at.alicdn.com/t/font_m6fm8xj1l6561or.woff?t=1478224507669') format('woff'), /* chrome, firefox */
+  url('//at.alicdn.com/t/font_m6fm8xj1l6561or.ttf?t=1478224507669') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('//at.alicdn.com/t/font_m6fm8xj1l6561or.svg?t=1478224507669#qsfont') format('svg'); /* iOS 4.1- */
+}
+
+.qsfont {
+  font-family:"qsfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.qsicon-add:before { content: "\e775"; }
+
+.qsicon-attachment:before { content: "\e776"; }
+
+.qsicon-back2top:before { content: "\e778"; }
+
+.qsicon-close:before { content: "\e779"; }
+
+.qsicon-costincluded:before { content: "\e77a"; }
+
+.qsicon-costnotincluded:before { content: "\e77b"; }
+
+.qsicon-discoverline:before { content: "\e77c"; }
+
+.qsicon-discovershape:before { content: "\e77d"; }
+
+.qsicon-earth:before { content: "\e77e"; }
+
+.qsicon-ensure:before { content: "\e77f"; }
+
+.qsicon-guide2:before { content: "\e780"; }
+
+.qsicon-guidepost:before { content: "\e781"; }
+
+.qsicon-help:before { content: "\e782"; }
+
+.qsicon-homeline:before { content: "\e783"; }
+
+.qsicon-homeshape:before { content: "\e784"; }
+
+.qsicon-like2line:before { content: "\e785"; }
+
+.qsicon-announcement:before { content: "\e787"; }
+
+.qsicon-chef:before { content: "\e788"; }
+
+.qsicon-clock:before { content: "\e789"; }
+
+.qsicon-down:before { content: "\e78a"; }
+
+.qsicon-enter:before { content: "\e78b"; }
+
+.qsicon-expression:before { content: "\e78c"; }
+
+.qsicon-guide:before { content: "\e78d"; }
+
+.qsicon-internationalflight:before { content: "\e78f"; }
+
+.qsicon-like:before { content: "\e790"; }
+
+.qsicon-myline:before { content: "\e792"; }
+
+.qsicon-myshape:before { content: "\e793"; }
+
+.qsicon-passport:before { content: "\e794"; }
+
+.qsicon-process:before { content: "\e795"; }
+
+.qsicon-screen:before { content: "\e796"; }
+
+.qsicon-search:before { content: "\e797"; }
+
+.qsicon-ship:before { content: "\e798"; }
+
+.qsicon-add2:before { content: "\e799"; }
+
+.qsicon-map:before { content: "\e79b"; }
+
+.qsicon-message:before { content: "\e79c"; }
+
+.qsicon-orderlist:before { content: "\e79d"; }
+
+.qsicon-passenger:before { content: "\e79f"; }
+
+.qsicon-play:before { content: "\e7a0"; }
+
+.qsicon-refresh:before { content: "\e7a1"; }
+
+.qsicon-selectseat:before { content: "\e7a3"; }
+
+.qsicon-switch:before { content: "\e7a4"; }
+
+.qsicon-ticket:before { content: "\e7a5"; }
+
+.qsicon-calendar:before { content: "\e7af"; }
+
+.qsicon-china:before { content: "\e7b0"; }
+
+.qsicon-detail:before { content: "\e7b3"; }
+
+.qsicon-failed:before { content: "\e7b6"; }
+

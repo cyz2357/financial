@@ -1,0 +1,269 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+   <include file="../manager/view/head.html"></include>
+    <script type="text/javascript">
+        $(function () {
+            $.fn.extend({
+                innerLoading: function () {
+                    $(this).html($("#inner-loading").html());
+                }
+            });
+            //自适
+            //if (parent)
+            //{
+            //    var index = parent.layer.getFrameIndex(window.name);
+            //    parent.layer.iframeAuto(index);
+            //}
+        });
+    </script>
+</head>
+<body>
+<div id="inner-loading" style="display:none;">
+    <div style="height:100%;width:100%; text-align:center; vertical-align:middle; padding-top:70px;padding-bottom:70px;">
+        <img src="/Public/img/loading1.gif" /><br />
+        加载中...
+    </div>
+</div>
+
+
+<style type="text/css">
+    iframe {
+        width: 100%;
+        height: 1000px;
+        border: none;
+    }
+</style>
+
+
+
+<div class="head">
+    <div class="">
+        <div class="logo"><img src="/Public/img/logo1.png"></div>
+        <ul id="navs" class="navs clearfix">
+            <li class="nLi">
+                <span><a   name="taburl"  alt-id="/Manager/RiskRule" alt-url="/Manager/RiskRule">权限管理<span class="arrows"></span></a></span>
+                <ul class="sub">
+                    <li><a name="taburl" alt-id="/Manager/RiskRule" alt-url="/Manager/RiskRule">增加账号权限</a></li>
+                    <li><a name="taburl" alt-id="/Manager/RiskOrderLog" alt-url="/Manager/RiskOrderLog">修改账号权限</a></li>
+                </ul>
+            </li>
+            <!--<li class="nLi">-->
+                <!--<span><a   name="taburl"  alt-id="/Manager/AssetUnit" alt-url="/Manager/AssetUnit">我的资产<span class="arrows"></span></a></span>-->
+                <!--<ul class="sub">-->
+            <!--<li><a name="taburl" alt-id="/Manager/AssetUnit" alt-url="/Manager/AssetUnit">资产管理</a></li>-->
+                <!--</ul>-->
+            <!--</li>-->
+            <li class="nLi">
+                <span><a   name="taburl"  alt-id="/Manager/DayProfitLoss" alt-url="/Manager/DayProfitLoss">交易统计<span class="arrows"></span></a></span>
+                <ul class="sub">
+                    <li><a name="taburl" alt-id="/Manager/DayProfitLoss" alt-url="/Manager/DayProfitLoss">业绩统计</a></li>
+                    <li><a name="taburl" alt-id="/Manager/TradeEntruste" alt-url="/Manager/TradeEntruste">委托记录</a></li>
+                    <li><a name="taburl" alt-id="/Manager/TradeEntrusteDeal" alt-url="/Manager/TradeEntrusteDeal">成交记录</a></li>
+                    <li><a name="taburl" alt-id="/Manager/PositionStatementLog" alt-url="/Manager/PositionStatementLog">结算记录</a></li>
+                    <li><a name="taburl" alt-id="/Manager/UserProfitLoss" alt-url="/Manager/UserProfitLoss">业绩统计(交易员)</a></li>
+                </ul>
+            </li>
+            <!--<li class="nLi">-->
+                <!--<span><a name="taburl" alt-id="/Manager/Monitor" alt-url="/Manager/Monitor">交易监控</a></span>-->
+            <!--</li>-->
+            <div class="fr">
+                <li class="nLi">
+                    <span><a href="#"><img src="/Public/img/tx.jpg">模拟柜台<span class="arrows"></span></a></span>
+                    <ul class="sub">
+                        <li><a href="#" class="openpasswd" rel="/Manager/Home/EditPassword" data-width="485px" data-height="320px">修改密码</a></li>
+                    </ul>
+                </li>
+                <li class="nLi">
+                    <span><a href="#" onclick="Logout()"><i class="tc"></i>退出</a></span>
+                </li>
+            </div>
+        </ul>
+
+    </div>
+</div>
+<!-- header -->
+
+<script type="text/javascript" language="javascript">
+    var Logout = function () {
+
+        layer.confirm('即将注销相关信息！', { icon: 3, title: '确定要注销吗?' }, function (index) {
+
+            //do something
+            $.ajax({
+                url: "/Manager/Login/LogOut",
+                type: "post",
+                success: function (data) {
+                    //注销清除缓存
+                    if (window.sessionStorage)
+                    {
+                        window.sessionStorage.clear();
+                    }
+                    var url = "/Manager/Login/login";
+                    window.location.href = url;
+                    layer.close(index);
+                }
+            });
+        });
+    }
+
+
+    // 头部切换
+    jQuery("#navs").slide({ type: "menu", titCell: ".nLi", targetCell: ".sub", effect: "slideDown", delayTime: 300, triggerTime: 0,});
+
+    $(".openpasswd").click(function() {
+        layer.open({
+            type: 2,
+            title: $(this).html(),
+            shadeClose: true,
+            shade: 0.6,
+            area: [$(this).attr("data-width"), $(this).attr("data-height")],
+            content: $(this).attr("rel")
+        });
+    });
+
+
+    var sys_goMenuPage = function (url) {
+        if (url.indexOf("%23") < 0) {
+            $("#MainContainer").html("");
+            //layer.load();
+            this.window.location.href = url;
+        }
+    };
+</script>
+
+<!-- 标签页 -->
+<div class="tab-top nav nav-tabs" id="maintab">
+    <ul>
+        <li class="cur" onclick="choiceTab(this)" onmouseup="ShowRight(this,'Manger_Home')">
+            <a href="#Manger_Home">首页<span></span></a>
+        </li>
+    </ul>
+</div>
+<div id="mousediv" class="top-right-con">
+    <i id="refresh" onclick="Refresh(this)" alt-id="">刷新当前</i>
+    <i id="closeother" onclick="CloseOther(this)" alt-id="">关闭其他</i>
+    <i onclick="CloseAll()">关闭全部</i>
+</div>
+<!-- 面包屑 -->
+
+<div class="tab-content">
+    <iframe class="tab-pane active" style="width:100%;" id="Manger_Home"></iframe>
+
+    <!--2 -->
+    <script type="text/javascript">
+        $(function () {
+            var errorCode = "0";
+            var url = "/Manager/index/trade";
+
+            if (errorCode == "NoAuth") {
+                layer.msg("没有对应的角色权限", { icon: 2 });
+                setTimeOut(function () {
+                    window.location.href = "/Manager/Login/login"
+                }, 2000);
+            }
+            else {
+                if (url != "-") {
+                    parent.document.getElementById("Manger_Home").contentWindow.location = "/Manager/index/trade";
+                }
+                else {
+                    //处理角色没有默认地址的时候跳转，预留
+                }
+            }
+        });
+
+    </script>
+
+</div>
+
+<script type="text/javascript">
+    res = document.getElementById("mousediv");
+    //点击标签tab
+    var choiceTab = function (obj) {
+        $(obj).addClass("cur").siblings().removeClass("cur");
+        $(obj).find("a").tab("show");
+    }
+    //关闭标签
+    var closeTab = function (obj) {
+        choiceTab($(obj).parent().parent().prev());
+        $($(obj).parent().attr('href')).remove();
+        $(obj).parents("li").remove();
+    }
+    //新增tab标签事件
+    $("a[name='taburl']").click(function () {
+        var url = $(this).attr('alt-url');
+        var id = $(this).attr('alt-id').replace(/\//g, '_');
+        if ($("#maintab").find('a[href="#' + id + '"]').attr('href') == "#" + id) {
+            $("#" + id + "").load($(this).attr('alt'));
+            $("#maintab").find('a[href="#' + id + '"]').html($(this).html() + "<span class=\"top-close\" onclick=\"closeTab(this)\"></span>");
+            choiceTab($("#maintab").find('a[href="#' + id + '"]').parent());
+            document.getElementById(id).contentWindow.location = url;
+            return;
+        }
+        $("#maintab").find('ul').append("<li onclick=\"choiceTab(this)\" onmouseup=\"ShowRight(this,'" + id + "')\"><a href=\"#" + id + "\">" + $(this).html() + "<span class=\"top-close\" onclick=\"closeTab(this)\"></span></a></li>");
+        layer.load();
+        $(".tab-content").append("<iframe class=\"tab-pane\" src='" + url + "' id=\"" + id + "\" onload='loadComplete()'></iframe>");
+        choiceTab($("#maintab").find('a[href="#' + id + '"]').parent())
+    })
+
+    var loadComplete = function () {
+        layer.closeAll();
+    };
+
+    //刷新 右键菜单
+    var Refresh = function (obj) {
+        var id = $(obj).attr("alt-id");
+        res.style.display = 'none';         //不显示div盒子
+        document.getElementById(id).contentWindow.location.reload();
+    }
+    //关闭其他 右键菜单
+    var CloseOther = function (obj) {
+        var id = $(obj).attr("alt-id");
+        $("#maintab").find("a").each(function () {
+            if ($(this).attr("href") != "#Manger_Home" && $(this).attr("href") != ("#" + id)) {
+                console.log($(this).attr("href"));
+                $($(this).attr('href')).remove();
+                $(this).parents("li").remove();
+            }
+        })
+        choiceTab($("#maintab").find("a[href='#" + id + "']").first().parents("li"));
+        res.style.display = 'none';         //不显示div盒子
+    }
+    var CloseAll = function () {
+        $("#maintab").find("a").each(function () {
+            if ($(this).attr("href") != "#Manger_Home") {
+                $($(this).attr('href')).remove();
+                $(this).parents("li").remove();
+            }
+        })
+        choiceTab($("#maintab").find("a[href='#Manger_Home']").first().parents("li"));
+        res.style.display = 'none';         //不显示div盒子
+    }
+    //关闭右键菜单显示
+    document.oncontextmenu = function () { return false };
+    //tab右键事件
+    var ShowRight = function (obj, id) {
+        //在body里点击触发事件
+        if (event.button === 2) {       //如果button=1（鼠标左键），button=2（鼠标右键），button=0（鼠标中间键）
+            var x = $(obj).offset().top;
+            var y = $(obj).offset().left;
+            res.style.top = x + $(obj).height() + 4 + 'px';     //鼠标点击时给div定位Y轴
+            res.style.left = y + 'px';    //鼠标点击时给div定位X轴
+            res.style.display = 'block';        //显示div盒子
+            $("#refresh").attr("alt-id", id);
+            $("#closeother").attr("alt-id", id);
+        } else {
+            res.style.display = 'none';         //否则不显示div盒子
+        }
+    }
+    $("#maintab").mouseup(function (e) {
+        if (event.button != 2) {
+            res.style.display = 'none';         //否则不显示div盒子
+        }
+    })
+</script>
+
+
+</body>
+</html>

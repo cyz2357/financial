@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+   <include file="../manager/view/head.html"></include>
+    <script type="text/javascript">
+        $(function () {
+            $.fn.extend({
+                innerLoading: function () {
+                    $(this).html($("#inner-loading").html());
+                }
+            });
+            //自适
+            //if (parent)
+            //{
+            //    var index = parent.layer.getFrameIndex(window.name);
+            //    parent.layer.iframeAuto(index);
+            //}
+        });
+    </script>
+</head>
+<body>
+<div id="inner-loading" style="display:none;">
+    <div style="height:100%;width:100%; text-align:center; vertical-align:middle; padding-top:70px;padding-bottom:70px;">
+        <img src="/Public/img/loading1.gif" /><br />
+        加载中...
+    </div>
+</div>
+
+<!-- 左边内容 -->
+<div class="con-left">
+    <div class="info">
+        <span class="imgbox"><img src="/Public/img/tx.jpg" /></span>
+        <span class="name">模拟柜台</span>
+        <span class="job"></span>
+    </div>
+    <div class="login-record">
+        <span class="login-retit">上次登录记录</span>
+        <ul>
+            <li>
+                <span class="login-l">IP：</span>
+                <span class="login-r">27.154.219.221</span>
+            </li>
+            <li>
+                <span class="login-l">地点：</span>
+                <span class="login-r">福建-厦门</span>
+            </li>
+            <li>
+                <span class="login-l">时间：</span>
+                <span class="login-r">2018-05-08 15:27:33</span>
+            </li>
+        </ul>
+        <span class="login-more"><a href="javascript:;" class="show-loginlog" rel="/Manager/Home/LoginLogList">更多></a></span>
+    </div>
+</div>
+<script type="text/javascript">
+    $('.show-loginlog').on('click', function () {
+        layer.open({
+            type: 2,
+            title: '登录历史记录',
+            shadeClose: true,
+            shade:0.9,
+            area: ['350px' , '450px'],
+            content: $(this).attr("rel")
+        });
+    });
+</script>
+
+<!-- 中间主内容 -->
+<div class="con-l-200">
+    <!-- 2 -->
+    <div class="sup-tit" style="padding-bottom:20px;">
+        <h3><i class="i20"></i>我的资产明细</h3>
+        <ul class="all-zc">
+
+            <li>
+                <span class="zc-tit">资产单元</span>
+                <span class="zc-zh"><i class="zc2"></i><a alt-url="/Manager/AssetUnit/AssetUnitOverview?assetid=aEE2UmgrS2w1eUk9" alt-id="/Manager/TradeMain/Index_2_aEE2UmgrS2w1eUk9" name="taburl">0000模NI</a></span>
+            </li>                    </ul>
+    </div>
+</div>
+<script>
+    $("a[name='taburl']").click(function () {
+        var url = $(this).attr('alt-url');
+        var id = $(this).attr('alt-id').replace(/\//g, '_');
+        if (parent.$("#maintab").find('a[href="#' + id + '"]').attr('href') == "#" + id) {
+            parent.$("#" + id + "").load($(this).attr('alt'));
+            parent.$("#maintab").find('a[href="#' + id + '"]').html($(this).html() + "<span class=\"top-close\" onclick=\"closeTab(this)\"></span>");
+            parent.choiceTab(parent.$("#maintab").find('a[href="#' + id + '"]').parent());
+            parent.layer.load();
+            parent.document.getElementById(id).contentWindow.location = url;
+            loadComplete();
+            return;
+        }
+        parent.$("#maintab").find('ul').append("<li onclick=\"choiceTab(this)\" onmouseup=\"ShowRight(this,'" + id + "')\"            ><a href=\"#" + id + "\">" + $(this).html() + "<span class=\"top-close\" onclick=\"closeTab(this)\"></span></a></li>");
+        parent.layer.load();
+
+        parent.$(".tab-content").append("<iframe class=\"tab-pane\" src='" + url + "' id=\"" + id + "\" onload='loadComplete()'><div style=\"width:300px;margin:160px auto\"></iframe>");
+        parent.choiceTab(parent.$("#maintab").find('a[href="#' + id + '"]').parent())
+    })
+    var loadComplete = function () {
+        layer.closeAll();
+    };
+</script>
+
+</body>
+</html>

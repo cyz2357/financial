@@ -1,0 +1,48 @@
+
+.tree-panel { background-color: white; width: 270px; border: solid 1px #eee; min-height: 400px; float: left; }
+.tree-panel .tree-title { line-height: 40px; font-size: 16px; font-family: 'Microsoft YaHei'; padding-left: 20px; background-color: #f8f8f8; }
+.tree-panel .tree-content { padding-top: 10px; }
+
+.right-content { margin-left: 300px; }
+
+
+.qs-loading { }
+
+.btn-refresh { float: right; margin-right: 10px; color: #808080; }
+a.btn-refresh:hover { color: #000000; }
+
+.qs-rotat { -webkit-animation: change 0.5s linear infinite; }
+
+@-webkit-keyframes change {
+    0% { -webkit-transform: rotate(0deg); }
+    50% { -webkit-transform: rotate(180deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+@-webkit-keyframes redTwinkle
+{
+    from {background:#ff9494;}
+    to {background:none;}
+}
+@-webkit-keyframes redGreen
+{
+    from {background:#b1facd;}
+    to {background:none;}
+}
+
+.twinkleRed { -webkit-animation:redTwinkle 1s; }
+.twinkleGreen { -webkit-animation:redGreen 1s; }
+
+.data-hide { display: none; }
+.earnmoney { color: red; font-size: 14px; font-weight: bold; font-family: 'Microsoft YaHei'; }
+.lossmoney { color: green; font-size: 14px; font-weight: bold; font-family: 'Microsoft YaHei'; }
+.inner-tr { border-bottom: none !important; height: auto !important; }
+.inner-td { padding: 0px !important; height: auto !important; }
+.inner-table { margin: 0px !important; }
+.expand-td { cursor: pointer; padding: 0px !important; }
+.expand-td a { display: block; padding-left: 10px; text-decoration: none; color: #808080; }
+.expand-td a:hover { background-color: #e9e9e9; }
+.expand-td span { display: initial !important; float:left; line-height:40px !important; margin-right:10px;  }
+.icon-expand { transform: rotate(90deg); -ms-transform: rotate(90deg); -webkit-transform: rotate(90deg); -o-transform: rotate(90deg); -moz-transform: rotate(90deg); }
+.icon-colspand { transform: rotate(0deg); -ms-transform: rotate(0deg); -webkit-transform: rotate(0deg); -o-transform: rotate(0deg); -moz-transform: rotate(0deg); }
+
+.tree_refresh {  float:right; margin-right:10px;color:gray; cursor:pointer;  }

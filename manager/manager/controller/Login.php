@@ -19,18 +19,23 @@ class Login extends Controller{
         $LoginPassword=input('LoginPassword');
         $testHash = new \PasswordHash(8, false);
         $hashedPassword = $testHash->HashPassword($LoginPassword);
-
         $user=Db('user')->where('del',0)->where('account',$LoginName)->find();
+        $bool= $testHash->CheckPassword($LoginPassword, $user['password']);  // false
 
-       $bool= $testHash->CheckPassword($hashedPassword, $user['password']);  // false
-        //校验密码，输出false
+        if($user){
 
-        if($user&&$bool==true){
-            
+            if($bool==true){
+                getAlert('登录成功','/manager/index/index');
+            }else{
+                getAlert('登录失败','/manager/login/login');
+            }
+        }else{
+            getAlert('登录失败','/manager/login/login');
+
         }
 
-
-
+        }
+        public function LogOut(){
 
         }
 }

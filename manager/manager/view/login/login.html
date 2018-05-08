@@ -33,7 +33,7 @@
         </div>
     </div>
 </div>
-<form action="/Manager/Login/LoginSubmit" data-ajax="true" data-ajax-begin="OnBegin" data-ajax-complete="OnComplete" data-ajax-method="Post" data-ajax-success="OnSuccess" id="from1" method="post">        <!--登录框-->
+<form action="/Manager/Login/LoginSubmit"   id="from1" method="post">        <!--登录框-->
     <div id="from_div" class="login-box">
         <div class="login-con">
             <h2 class="h2">用户登录</h2>
@@ -86,22 +86,7 @@
             $("#login").button("loading");
             layer.load(2,{ shade: 0.33, shadeClose: false });
         };
-        var OnSuccess = function (result) {
-            if (result.RequestResult)
-            {
-                layer.msg('欢迎您，' + result.Data + '，正在为您跳转...', { icon: 1, time: 50000, shade: 0.5, shadeClose:false });
-                var url = "/Manager";
-                window.location.href = url;
-            }
-            else
-            {
-                //isRemember($("#cookiename"));
-                $("#firstlogin").val("1");
-                layer.msg(result.Message, { icon: 2 });
-                $("#yzmImg").click();
 
-            }
-        };
         var OnComplete = function () {
             $("#login").button("reset");
             layer.closeAll('loading');
