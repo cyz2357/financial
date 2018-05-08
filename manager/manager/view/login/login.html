@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+   <include file="../manager/view/head.html"></include>
+
+
+
+</head>
+
+<body>
+<div class="qs_top">
+    <p>欢迎来到极速交易云管理平台!</p>
+</div>
+<div class="qs_header"><img src="/Public/img/logo.png" class="logo fl" alt=""><h2>极速交易云平台</h2></div>
+<!--banner-->
+<div class="banner">
+    <div class="banner-box">
+        <div class="banner-li">
+            <ul>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <div class="banner-img">
+            <ul>
+                <li><a href="javascript:;"><img src="/Public/img/bg1.jpg"></a></li>
+
+            </ul>
+        </div>
+        <div class="auto">
+            <a class="prev" href="javascript:void(0)"></a>
+            <a class="next" href="javascript:void(0)"></a>
+        </div>
+    </div>
+</div>
+<form action="/Manager/Login/LoginSubmit" data-ajax="true" data-ajax-begin="OnBegin" data-ajax-complete="OnComplete" data-ajax-method="Post" data-ajax-success="OnSuccess" id="from1" method="post">        <!--登录框-->
+    <div id="from_div" class="login-box">
+        <div class="login-con">
+            <h2 class="h2">用户登录</h2>
+            <input id="remember" name="remember" type="hidden" value="" />
+            <div class="qs-form">
+                <label for="inputtext" class="login-pic login-zh"></label>
+                <input class="login-text w300" id="LoginName" name="LoginName" placeholder="请输入用户名" type="text" value="" />
+
+            </div>
+            <div class="qs-form">
+                <label for="inputPassword" class="login-pic login-mm"></label>
+                <input class="login-text w300" id="LoginPassword" name="LoginPassword" placeholder="请输入密码" type="password" />
+
+            </div>
+
+            <button id="login" data-loading-text="登录中..." class="btn-login">立即登录</button>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" id="cookiename" onclick="isRemember(this)" value="remember-me">保存账号
+                </label>
+                <a href="#"><i>忘记密码</i></a>
+            </div>
+        </div>
+    </div>
+</form>    <!--footer-->
+<div class="footer">
+    <p>
+        <span> <span style="font-family:arial">©</span>2017极速交易云管理平台 版权所有    </span>
+
+    </p>
+</div>
+<script type="text/javascript">
+
+        function isRemember(obj) {
+            if (obj.checked) {
+                $("#remember").val("1");
+            } else {
+                $("#remember").val("0");
+            }
+
+        }
+        var OnBegin = function () {
+            var obj = document.getElementById("cookiename");
+            if (obj.checked) {
+                $("#remember").val("1");
+            } else {
+                $("#remember").val("0");
+            }
+
+            $("#login").button("loading");
+            layer.load(2,{ shade: 0.33, shadeClose: false });
+        };
+        var OnSuccess = function (result) {
+            if (result.RequestResult)
+            {
+                layer.msg('欢迎您，' + result.Data + '，正在为您跳转...', { icon: 1, time: 50000, shade: 0.5, shadeClose:false });
+                var url = "/Manager";
+                window.location.href = url;
+            }
+            else
+            {
+                //isRemember($("#cookiename"));
+                $("#firstlogin").val("1");
+                layer.msg(result.Message, { icon: 2 });
+                $("#yzmImg").click();
+
+            }
+        };
+        var OnComplete = function () {
+            $("#login").button("reset");
+            layer.closeAll('loading');
+            if (window.sessionStorage) {
+                window.sessionStorage.clear();
+            }
+        }
+
+
+</script>
+<script>
+    jQuery(".banner").slide({ mainCell: ".banner-img ul", titCell: ".banner-li ul", autoPlay: true, autoPage: "<li></li>", effect: "left", interTime: 10000, trigger: "click", titOnClassName: "cur", });
+</script>
+</body>
+
+</html>
